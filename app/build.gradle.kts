@@ -31,7 +31,7 @@ dependencies {
 
     implementation("org.apache.logging.log4j:log4j-core:2.12.0")
 
-    implementation("org.apache.inlong:inlong:1.8.0")
+    implementation("org.apache.inlong:inlong:1.7.0")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
