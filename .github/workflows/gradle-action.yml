@@ -21,10 +21,9 @@ jobs:
           distribution: 'temurin'
 
       - name: Set up Gradle Build Action
-        uses: gradle/gradle-build-action@v3
+        uses: gradle/actions/setup-gradle@v3
         with:
           dependency-graph: generate-and-upload
-          cache-disabled: true
           
       - name: Build and test with Gradle
         run: ./gradlew build
