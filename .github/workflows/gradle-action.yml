@@ -30,13 +30,13 @@ jobs:
 
 
   review:
-      runs-on: ubuntu-latest
-      if: github.event_name == 'pull_request'
-      needs: build
-      
-      steps:
-      - name: 'Dependency Review'
-        uses: actions/dependency-review-action@v4
-
-
-
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    needs: build
+    permissions:
+      pull-requests: write
+    steps:
+    - name: 'Dependency Review'
+      uses: actions/dependency-review-action@v4
+      with:
+        comment-summary-in-pr: true
