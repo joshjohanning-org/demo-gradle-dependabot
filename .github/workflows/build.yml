@@ -48,3 +48,9 @@ jobs:
         if: github.event_name == 'pull_request'
         with:
           comment-summary-in-pr: true
+
+      - name: Write GitHub context to log
+        if: always()
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
