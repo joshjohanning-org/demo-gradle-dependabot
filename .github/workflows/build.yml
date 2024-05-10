@@ -26,6 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-java@v3
@@ -41,16 +42,15 @@ jobs:
         with:
           gradle-build-module: |-
             :app
-  review:
-    if: github.event_name == 'pull_request'
-    needs: sbom
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-    steps:
-      - name: 'Checkout Repository'
-        uses: actions/checkout@v3
+      
       - name: 'Dependency Review'
         uses: actions/dependency-review-action@v3
+        if: github.event_name == 'pull_request'
         with:
           comment-summary-in-pr: true
+
+      - name: Write GitHub context to log
+        if: always()
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
